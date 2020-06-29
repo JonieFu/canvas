@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.canvas-wrapper {
+  flex-grow: 1;
+  padding: 40px;
+  background: rgb(136, 136, 136);
+}
+#canvas {
+  display: block;
+  background: white;
+}
+.buttons {
+  padding-left: 0.5vh;
+  padding-top: 0.5vh;
+  height: 12vh;
+}
+.color {
+  width: 28vh;
+  margin-top: 1vh;
+}
+.color div {
+  margin: 0;
+  display: inline-block;
+  border: 0.5px solid black;
+  width: 2vh;
+  height: 2vh;
+}
+button {
+  background-color: white;
+  border: none;
+}
+.color div:hover {
+  box-shadow: inset 5em 1em rgba(82, 110, 109, 0.3);
+}
