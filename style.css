@@ -11,7 +11,7 @@
 }
 .canvas-wrapper {
   flex-grow: 1;
-  padding: 40px;
+  padding: 20px;
   background: rgb(136, 136, 136);
 }
 #canvas {
@@ -19,9 +19,30 @@
   background: white;
 }
 .buttons {
+  border: 1px solid red;
+  display: flex;
   padding-left: 0.5vh;
   padding-top: 0.5vh;
-  height: 12vh;
+  height: 15vh;
+}
+.gongju {
+  border-right: 1px solid black;
+  padding: 5px 10px;
+}
+.gongju .eraser {
+  margin-left: 10px;
+}
+.gongju > .text {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+.line {
+  display: flex;
+  flex-direction: column;
+}
+.linewidth {
+  text-align: center;
 }
 .color {
   width: 28vh;

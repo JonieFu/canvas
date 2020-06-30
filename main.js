@@ -9,9 +9,12 @@ const undo = document.querySelector(".undo");
 const redo = document.querySelector(".redo");
 const eraser = document.querySelector(".eraser");
 const pencil = document.querySelector(".pencil");
+
+const padding = ws.padding.split("p")[0];
+
 //设置画板宽高
-const width = parseFloat(ws.width.split("p")[0]) - 80;
-const height = parseFloat(ws.height.split("p")[0]) - 80;
+const width = parseFloat(ws.width.split("p")[0]) - padding * 2;
+const height = parseFloat(ws.height.split("p")[0]) - padding * 2;
 canvas.width = width;
 canvas.height = height;
 //撤销
