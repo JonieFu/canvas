@@ -124,7 +124,6 @@ function drawLine(x1, y1, x2, y2) {
   if (step < canvasHistory.length) {
     canvasHistory.length = step;
   }
-
   ctx.beginPath();
   ctx.moveTo(x1, y1);
   ctx.lineTo(x2, y2);
@@ -134,31 +133,20 @@ function drawLine(x1, y1, x2, y2) {
   ctx.stroke();
   canvasHistory.push(canvas.toDataURL());
 }
-if ("ontouchstart" in document.documentElement) {
-  canvas.ontouchstart = (e) => {
-    last = [e.touches[0].clientX, e.touches[0].clientY];
-  };
-  canvas.ontouchmove = (e) => {
-    drawLine(last[0], last[1], e.touches[0].clientX, e.touches[0].clientY);
-    last = [e.touches[0].clientX, e.touches[0].clientY];
-  };
-} else {
-  // PC端
-
-  canvas.onmousedown = (e) => {
-    painting = true;
-    last = [e.offsetX, e.offsetY];
-  };
-  canvas.onmouseup = () => {
-    painting = false;
-  };
-  canvas.onmouseleave = () => {
-    painting = false;
-  };
-  canvas.onmousemove = (e) => {
-    if (painting === true) {
-      drawLine(last[0], last[1], e.offsetX, e.offsetY);
-    }
-    last = [e.offsetX, e.offsetY];
-  };
-}
+// PC端
+canvas.onmousedown = (e) => {
+  painting = true;
+  last = [e.offsetX, e.offsetY];
+};
+canvas.onmouseup = () => {
+  painting = false;
+};
+canvas.onmouseleave = () => {
+  painting = false;
+};
+canvas.onmousemove = (e) => {
+  if (painting === true) {
+    drawLine(last[0], last[1], e.offsetX, e.offsetY);
+  }
+  last = [e.offsetX, e.offsetY];
+};
