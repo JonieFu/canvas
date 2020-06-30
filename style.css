@@ -3,7 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
-
+button {
+  outline: none;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -11,42 +13,73 @@
 }
 .canvas-wrapper {
   flex-grow: 1;
-  padding: 20px;
-  background: rgb(136, 136, 136);
+  padding: 3vh;
+  background: rgb(136, 136, 136, 0.3);
 }
 #canvas {
   display: block;
   background: white;
+  box-shadow: 10px 10px 5px 0px rgba(117, 112, 117, 0.36);
 }
 .buttons {
-  border: 1px solid red;
   display: flex;
   padding-left: 0.5vh;
   padding-top: 0.5vh;
   height: 15vh;
 }
 .gongju {
-  border-right: 1px solid black;
-  padding: 5px 10px;
+  border-right: 1px solid rgba(209, 212, 212, 0.3);
+  padding: 1vh 2vh;
 }
 .gongju .eraser {
-  margin-left: 10px;
+  border: 1px solid white;
+  margin-left: 2vh;
+}
+.gongju .pencil {
+  border: 1px solid #3f48cc;
 }
 .gongju > .text {
-  margin-top: 15px;
-  font-size: 14px;
+  margin-top: 3vh;
+  font-size: 3vh;
   text-align: center;
+}
+.gongju .undo {
+  margin: 0 2vh 0 2vh;
 }
 .line {
   display: flex;
+  padding: 1vh 2vh;
+  border-right: 1px solid rgba(209, 212, 212, 0.3);
   flex-direction: column;
 }
+.line .section {
+  padding: 2vh 0;
+}
 .linewidth {
+  margin-top: 4vh;
+  font-size: 3vh;
+  padding: 0;
   text-align: center;
 }
+.input {
+  display: flex;
+  font-size: 3vh;
+}
+
+.color-left {
+  display: flex;
+  padding: 1vh 2vh;
+  border-right: 1px solid rgba(209, 212, 212, 0.3);
+  flex-direction: column;
+}
+.color-left span {
+  margin-top: 4vh;
+  font-size: 3vh;
+}
 .color {
-  width: 28vh;
-  margin-top: 1vh;
+  padding: 1vh;
+  width: 31vh;
+  border-right: 1px solid rgba(209, 212, 212, 0.3);
 }
 .color div {
   margin: 0;

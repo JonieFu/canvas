@@ -11,7 +11,6 @@ const eraser = document.querySelector(".eraser");
 const pencil = document.querySelector(".pencil");
 
 const padding = ws.padding.split("p")[0];
-
 //设置画板宽高
 const width = parseFloat(ws.width.split("p")[0]) - padding * 2;
 const height = parseFloat(ws.height.split("p")[0]) - padding * 2;
@@ -28,6 +27,7 @@ let painting = false;
 ctx.lineWidth = lineWidth;
 ctx.strokeStyle = "black";
 canvas.style.cursor = "crosshair";
+
 let last;
 window.devicePixelRatio ? setScale(window.devicePixelRatio) : setScale(4);
 function setScale(d) {
@@ -92,16 +92,22 @@ redo.addEventListener("click", () => {
   }
 });
 //橡皮
-eraser.addEventListener("click", () => {
+eraser.addEventListener("click", (e) => {
+  e.preventDefault();
   ctx.strokeStyle = "white";
   ctx.lineWidth = 20;
+  eraser.style.border = "1px solid #3f48cc";
+  pencil.style.border = "1px solid white";
   canvas.style.cursor = "pointer";
   globalCompositeOperation = "destination-out";
 });
 //铅笔
-pencil.addEventListener("click", () => {
+pencil.addEventListener("click", (e) => {
+  e.preventDefault();
   ctx.lineWidth = select.value;
   ctx.strokeStyle = input.value;
+  pencil.style.border = "1px solid #3f48cc";
+  eraser.style.border = "1px solid white";
   canvas.style.cursor = "crosshair";
 });
 //rgbToHex
