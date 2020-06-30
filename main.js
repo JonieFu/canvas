@@ -2,14 +2,16 @@
 const canvas = document.getElementById("canvas");
 const canvasWrapper = document.querySelector(".canvas-wrapper");
 const color = document.querySelector(".color");
-const ws = getComputedStyle(canvasWrapper);
 const input = document.querySelector("input");
 const select = document.querySelector("#line-select");
-const undo = document.querySelector(".undo");
-const redo = document.querySelector(".redo");
+const tool = document.querySelector(".tool-select");
 const eraser = document.querySelector(".eraser");
 const pencil = document.querySelector(".pencil");
-
+const icon1 = document.querySelector(".icon1");
+const icon2 = document.querySelector(".icon2");
+const icon3 = document.querySelector(".icon3");
+const icon4 = document.querySelector(".icon4");
+const ws = getComputedStyle(canvasWrapper);
 const padding = ws.padding.split("p")[0];
 //设置画板宽高
 const width = parseFloat(ws.width.split("p")[0]) - padding * 2;
@@ -60,55 +62,50 @@ color.addEventListener("click", (e) => {
 
   ctx.strokeStyle = getComputedStyle(e.target).backgroundColor;
 });
-// 撤销按钮添加事件
-undo.addEventListener("click", () => {
-  if (step >= 0) {
-    step--;
-    ctx.clearRect(0, 0, width, height);
-    let canvasPic = new Image();
-    canvasPic.src = canvasHistory[step];
-    if (step === -1) {
-      canvasPic.src = canvas.toDataURL();
-    }
-    canvasPic.onload = function () {
-      ctx.drawImage(canvasPic, 0, 0);
-    };
-    console.log(step);
-  } else {
-    window.alert("不能再继续撤销了");
-    return;
-  }
-});
-redo.addEventListener("click", () => {
-  if (step < canvasHistory.length - 1) {
-    step++;
-    let canvasPic = new Image();
-    canvasPic.src = canvasHistory[step];
-    canvasPic.addEventListener("load", () => {
+tool.addEventListener("click", (e) => {
+  if (e.target === icon1) {
+    ctx.lineWidth = select.value;
+    ctx.strokeStyle = input.value;
+    pencil.style.border = "1px solid #3f48cc";
+    eraser.style.border = "1px solid white";
+    canvas.style.cursor = "crosshair";
+    ctx.globalCompositeOperation = "source-over";
+  } else if (e.target === icon2) {
+    ctx.lineWidth = 20;
+    eraser.style.border = "1px solid #3f48cc";
+    pencil.style.border = "1px solid white";
+    canvas.style.cursor = "pointer";
+    ctx.globalCompositeOperation = "destination-out";
+  } else if (e.target === icon3) {
+    if (step >= 0) {
+      step--;
       ctx.clearRect(0, 0, width, height);
-      ctx.drawImage(canvasPic, 0, 0);
-    });
-  } else {
-    window.alert("已经是最新记录了");
+      let canvasPic = new Image();
+      canvasPic.src = canvasHistory[step];
+      if (step === -1) {
+        canvasPic.src = canvas.toDataURL();
+      }
+      canvasPic.onload = function () {
+        ctx.drawImage(canvasPic, 0, 0);
+      };
+      console.log(step);
+    } else {
+      window.alert("不能再继续撤销了");
+      return;
+    }
+  } else if (e.target === icon4) {
+    if (step < canvasHistory.length - 1) {
+      step++;
+      let canvasPic = new Image();
+      canvasPic.src = canvasHistory[step];
+      canvasPic.addEventListener("load", () => {
+        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(canvasPic, 0, 0);
+      });
+    } else {
+      window.alert("已经是最新记录了");
+    }
   }
-});
-//橡皮
-eraser.addEventListener("click", (e) => {
-  // ctx.strokeStyle = "white";
-  ctx.lineWidth = 20;
-  eraser.style.border = "1px solid #3f48cc";
-  pencil.style.border = "1px solid white";
-  canvas.style.cursor = "pointer";
-  ctx.globalCompositeOperation = "destination-out";
-});
-//铅笔
-pencil.addEventListener("click", (e) => {
-  ctx.lineWidth = select.value;
-  ctx.strokeStyle = input.value;
-  pencil.style.border = "1px solid #3f48cc";
-  eraser.style.border = "1px solid white";
-  canvas.style.cursor = "crosshair";
-  ctx.globalCompositeOperation = "source-over";
 });
 //rgbToHex
 function componentToHex(c) {

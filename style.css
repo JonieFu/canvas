@@ -27,23 +27,23 @@ button {
   padding-top: 0.5vh;
   height: 15vh;
 }
-.gongju {
+.tools {
   border-right: 1px solid rgba(209, 212, 212, 0.3);
   padding: 1vh 2vh;
 }
-.gongju .eraser {
+.tools .eraser {
   border: 1px solid white;
   margin-left: 2vh;
 }
-.gongju .pencil {
+.tools .pencil {
   border: 1px solid #3f48cc;
 }
-.gongju > .text {
+.tools > .text {
   margin-top: 3vh;
   font-size: 3vh;
   text-align: center;
 }
-.gongju .undo {
+.tools .undo {
   margin: 0 2vh 0 2vh;
 }
 .line {
