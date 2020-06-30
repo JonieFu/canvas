@@ -133,6 +133,9 @@ function drawLine(x1, y1, x2, y2) {
   ctx.stroke();
   canvasHistory.push(canvas.toDataURL());
 }
+if (width < 500) {
+  window.alert("为了不影响体验，请在PC端打开");
+}
 // PC端
 canvas.onmousedown = (e) => {
   painting = true;
