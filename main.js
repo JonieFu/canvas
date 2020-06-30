@@ -73,6 +73,7 @@ undo.addEventListener("click", () => {
     canvasPic.onload = function () {
       ctx.drawImage(canvasPic, 0, 0);
     };
+    console.log(step);
   } else {
     window.alert("不能再继续撤销了");
     return;
@@ -93,22 +94,21 @@ redo.addEventListener("click", () => {
 });
 //橡皮
 eraser.addEventListener("click", (e) => {
-  e.preventDefault();
-  ctx.strokeStyle = "white";
+  // ctx.strokeStyle = "white";
   ctx.lineWidth = 20;
   eraser.style.border = "1px solid #3f48cc";
   pencil.style.border = "1px solid white";
   canvas.style.cursor = "pointer";
-  globalCompositeOperation = "destination-out";
+  ctx.globalCompositeOperation = "destination-out";
 });
 //铅笔
 pencil.addEventListener("click", (e) => {
-  e.preventDefault();
   ctx.lineWidth = select.value;
   ctx.strokeStyle = input.value;
   pencil.style.border = "1px solid #3f48cc";
   eraser.style.border = "1px solid white";
   canvas.style.cursor = "crosshair";
+  ctx.globalCompositeOperation = "source-over";
 });
 //rgbToHex
 function componentToHex(c) {
