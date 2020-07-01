@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Canvas画板</title>
     <link rel="stylesheet" href="style.css" />
+    <style type="text/css">
+      .icon {
+        padding: 1vh 2vh;
+        width: 4em;
+        height: 4em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -134,9 +144,16 @@
             <div style="background: #c8bfe7;"></div>
           </div>
         </div>
+        <button class="download">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xiazai"></use>
+          </svg>
+        </button>
       </div>
       <div class="canvas-wrapper"><canvas id="canvas"></canvas></div>
     </div>
+    <script src="//at.alicdn.com/t/font_1916282_3kz9pvzmfk.js"></script>
+    <script src="//at.alicdn.com/t/font_1780339_wsy94urohvb.js"></script>
+    <script src="main.js"></script>
   </body>
-  <script src="main.js"></script>
 </html>

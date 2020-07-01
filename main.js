@@ -13,6 +13,7 @@ const icon3 = document.querySelector(".icon3");
 const icon4 = document.querySelector(".icon4");
 const ws = getComputedStyle(canvasWrapper);
 const padding = ws.padding.split("p")[0];
+const download = document.querySelector(".download");
 //设置画板宽高
 const width = parseFloat(ws.width.split("p")[0]) - padding * 2;
 const height = parseFloat(ws.height.split("p")[0]) - padding * 2;
@@ -29,16 +30,7 @@ let painting = false;
 ctx.lineWidth = lineWidth;
 ctx.strokeStyle = "black";
 canvas.style.cursor = "crosshair";
-
 let last;
-window.devicePixelRatio ? setScale(window.devicePixelRatio) : setScale(4);
-function setScale(d) {
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
-  canvas.height = height * d;
-  canvas.width = width * d;
-  ctx.scale(d, d);
-}
 // 线条选择器
 select.onchange = () => {
   if (select.value) {
@@ -59,7 +51,6 @@ color.addEventListener("click", (e) => {
     .split(",");
   const hex = rgbToHex(parseInt(rgb[0]), parseInt(rgb[1]), parseInt(rgb[2]));
   input.value = hex;
-
   ctx.strokeStyle = getComputedStyle(e.target).backgroundColor;
 });
 tool.addEventListener("click", (e) => {
@@ -107,6 +98,15 @@ tool.addEventListener("click", (e) => {
     }
   }
 });
+download.addEventListener("click", () => {
+  var url = canvas.toDataURL("image/png");
+  var a = document.createElement("a");
+  document.body.appendChild(a);
+  a.href = url;
+  a.download = "我的画儿";
+  a.target = "_blank";
+  a.click();
+});
 //rgbToHex
 function componentToHex(c) {
   var hex = c.toString(16);
@@ -121,6 +121,7 @@ function drawLine(x1, y1, x2, y2) {
   if (step < canvasHistory.length) {
     canvasHistory.length = step;
   }
+  ctx.save();
   ctx.beginPath();
   ctx.moveTo(x1, y1);
   ctx.lineTo(x2, y2);
