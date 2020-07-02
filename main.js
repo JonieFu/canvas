@@ -22,7 +22,6 @@ canvas.height = height;
 //撤销
 let step = -1;
 let canvasHistory = [];
-
 //画板初始值
 let lineWidth = 1;
 let ctx = canvas.getContext("2d");
@@ -35,8 +34,6 @@ let last;
 select.onchange = () => {
   if (select.value) {
     ctx.lineWidth = select.value;
-  } else {
-    return;
   }
 };
 // input type = color
@@ -79,7 +76,6 @@ tool.addEventListener("click", (e) => {
       canvasPic.onload = function () {
         ctx.drawImage(canvasPic, 0, 0);
       };
-      console.log(step);
     } else {
       window.alert("不能再继续撤销了");
       return;
@@ -121,11 +117,9 @@ function drawLine(x1, y1, x2, y2) {
   if (step < canvasHistory.length) {
     canvasHistory.length = step;
   }
-  ctx.save();
   ctx.beginPath();
   ctx.moveTo(x1, y1);
   ctx.lineTo(x2, y2);
-  ctx.lineCap = "round";
   ctx.lineJoin = "round";
   ctx.closePath();
   ctx.stroke();
