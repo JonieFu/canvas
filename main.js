@@ -1,16 +1,16 @@
 //获取元素
 const canvas = document.getElementById("canvas");
-const canvasWrapper = document.querySelector(".canvas-wrapper");
+const canvasWrapper = canvas.parentNode;
 const color = document.querySelector(".color");
 const input = document.querySelector("input");
 const select = document.querySelector("#line-select");
 const tool = document.querySelector(".tool-select");
-const eraser = document.querySelector(".eraser");
-const pencil = document.querySelector(".pencil");
-const icon1 = document.querySelector(".icon1");
-const icon2 = document.querySelector(".icon2");
-const icon3 = document.querySelector(".icon3");
-const icon4 = document.querySelector(".icon4");
+const eraser = tool.querySelector(".eraser");
+const pencil = tool.querySelector(".pencil");
+const icon1 = tool.querySelector(".icon1");
+const icon2 = tool.querySelector(".icon2");
+const icon3 = tool.querySelector(".icon3");
+const icon4 = tool.querySelector(".icon4");
 const ws = getComputedStyle(canvasWrapper);
 const padding = ws.padding.split("p")[0];
 const download = document.querySelector(".download");
@@ -29,6 +29,7 @@ let painting = false;
 ctx.lineWidth = lineWidth;
 ctx.strokeStyle = "black";
 canvas.style.cursor = "crosshair";
+pencil.style.border = "1px solid #3f48cc";
 let last;
 // 线条选择器
 select.onchange = () => {
@@ -56,17 +57,28 @@ tool.addEventListener("click", (e) => {
     ctx.strokeStyle = input.value;
     pencil.style.border = "1px solid #3f48cc";
     eraser.style.border = "1px solid white";
+    icon3.parentNode.style.border = "1px solid white";
+    icon4.parentNode.style.border = "1px solid white";
     canvas.style.cursor = "crosshair";
     ctx.globalCompositeOperation = "source-over";
   } else if (e.target === icon2) {
     ctx.lineWidth = 20;
     eraser.style.border = "1px solid #3f48cc";
     pencil.style.border = "1px solid white";
+    icon3.parentNode.style.border = "1px solid white";
+    icon4.parentNode.style.border = "1px solid white";
     canvas.style.cursor = "pointer";
     ctx.globalCompositeOperation = "destination-out";
   } else if (e.target === icon3) {
+    ctx.lineWidth = select.value;
+    ctx.globalCompositeOperation = "source-over";
+    icon3.parentNode.style.border = "1px solid #3f48cc";
+    icon4.parentNode.style.border = "1px solid white";
+    eraser.style.border = "1px solid white";
+    pencil.style.border = "1px solid white";
+    canvas.style.cursor = "crosshair";
     if (step >= 0) {
-      step--;
+      step = step - 5;
       ctx.clearRect(0, 0, width, height);
       let canvasPic = new Image();
       canvasPic.src = canvasHistory[step];
@@ -81,8 +93,15 @@ tool.addEventListener("click", (e) => {
       return;
     }
   } else if (e.target === icon4) {
+    canvas.style.cursor = "crosshair";
+    ctx.lineWidth = select.value;
+    ctx.globalCompositeOperation = "source-over";
+    icon4.parentNode.style.border = "1px solid #3f48cc";
+    icon3.parentNode.style.border = "1px solid white";
+    eraser.style.border = "1px solid white";
+    pencil.style.border = "1px solid white";
     if (step < canvasHistory.length - 1) {
-      step++;
+      step = step + 5;
       let canvasPic = new Image();
       canvasPic.src = canvasHistory[step];
       canvasPic.addEventListener("load", () => {

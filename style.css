@@ -45,6 +45,11 @@ button {
 }
 .tools .undo {
   margin: 0 2vh 0 2vh;
+  border: 1px solid white;
+}
+.tools .redo {
+  margin: 0 2vh 0 2vh;
+  border: 1px solid white;
 }
 .line {
   display: flex;
@@ -93,4 +98,7 @@ button {
 }
 .color div:hover {
   box-shadow: inset 5em 1em rgba(82, 110, 109, 0.3);
+}
+.download svg {
+  width: 100px;
 }
